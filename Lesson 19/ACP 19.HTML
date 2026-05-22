@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                background-color: bisque;
+            }
+            h1 {
+                color:red;
+            }
+            h2 {
+                color:pink;
+            }
+        </style>
+    </head>
+
+<body>
+    <h1 id="myH"></h1>
+    <p id="myP"></p>
+    <script>
+        //My heading:
+        document.getElementById("myH").innerHTML = "JavaScript Comments";
+        //My paragraph:
+        document.getElementById("myP").innerHTML = "My first paragraph";
+    </script>
+
+    <h1>JavaScript Variables</h1>
+    <p>Sum of two Numbers</p>
+    <p id="result"></p>
+    <script>
+        var num = 7;
+        var sum = num + 22;
+        document.getElementById("result").innerHTML =
+            "The total is:" + sum;
+    </script>
+
+    <h2> Operator</h2>
+    <p id="demo1"></p>
+    <script>
+        <!--Addition-->
+        //*use +, -, *, / operators*/
+        var num = 9;
+        var sum = num + 12;
+        document.getElementById("demo1").innerHTML = sum;
+
+    </script>
+
+    <h2>JavaScript Statements</h2>
+
+    <p>A <b>JavaScript program</b> is a list of
+        <b>statements</b> to be executed by a computer.
+    </p>
+
+    <p id="demo2"></p>
+
+    <script>
+        var num, sum; // Statement 1
+        num = 89; // Statement 2
+        sum = num + 7; // Statement 3
+
+        document.getElementById("demo2").innerHTML =
+            "The value of sum is " + sum + ".";
+
+    </script>
+
+</body>
+
+</html>
