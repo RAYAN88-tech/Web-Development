@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<htm>
+
+    <head>
+        <title>Student Score Management System</title>
+
+        <style>
+            body {
+                font-family: Arial;
+                text-align: center;
+                margin-top: 30px;
+            }
+
+            button {
+                padding: 10px;
+                margin: 5px;
+            }
+
+            #output {
+                border: 1px solid black;
+                padding: 15px;
+                width: 60%;
+                margin: auto;
+                margin-top: 20px;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <h1>Student Score Management System</h1>
+
+        <p>This activity demonstrates:</p>
+        <ul style="display:inline-block; text-align:left;">
+            <li>eval() → Calculate total and average</li>
+            <li>sort() → Arrange scores</li>
+            <li>map() → Add bonus marks</li>
+        </ul>
+
+        <h3>Student Scores</h3>
+        <p id="scores"></p>
+
+        <button onclick="showTotal()">Calculate total and average</button>
+        <button onclick="ascending()">Sort Ascending</button>
+        <button onclick="descending()">Sort Descending</button>
+        <button onclick="bonusMarks()">Add 10 Bonus Marks</button>
+        <button onclick="resetScores()">Reset</button>
+
+        <div id="output">
+            Click a button to perform an action.
+        </div>
+
+        <script>
+
+            // Original scores
+            var orginalScores = [78, 56, 92, 45, 83, 67];
+
+            // Working array
+            var scores = [78, 56, 92, 45, 83, 67];
+
+            // Display intial values
+            document.getElementById("scores").innerHTML =
+                "Current Scores: " + scores;
+
+            // Evaluate Function
+            function showTotal() {
+
+                var expression = scores.join("+");
+
+                var total = eval(expression);
+
+                var average = (total / scores.length).toFixed(2);
+
+                document.getElementById("output").innerHTML =
+                    "<h3>Total and Average</h3>"
+                "Scores: " + scores + "<br><br>" +
+                    "Total Marks = " + total +
+                    "<br>" +
+                    "Average = " + average;
+
+            }
+
+            // ------- Sort Ascending ---------
+            function ascending() {
+
+                scores.sort(function (a, b) {
+                    return a - b;
+                });
+
+                document.getElementById("output").innerHTML =
+                    "<h3>Ascending Order</h3>" +
+                    scores;
+
+            }
+
+            //  Sort Descending
+            function descending() {
+
+                scores.sort(function (a, b) {
+                    return b - a;
+                });
+
+                document.getElementById("output").innerHTML =
+                    "<h3>Descending Order</h3>" +
+                    scores;
+
+            }
+
+            // Map Function
+            function bonusMarks() {
+
+                var updatedScores =
+                    scores.map(function (score) {
+
+                        return score + 10;
+
+                    })
+
+                socres = updatedScores;
+
+                document.getElementById("output").innerHTML =
+                    "<h3>Bonus Applied</h3>" +
+                    "Updated Scores:<br>" +
+                    scores;
+
+            }
+
+
+            // Reset
+            function resetScores() {
+
+                scores = [...originalScores];
+
+                document.getElementById("output").innerHTML =
+                    "Scores reset succesfully.<br><br>" +
+                    scores;
+
+            }
+
+        </script>
+
+    </body>
+</htm>
