@@ -62,7 +62,7 @@
             }, 1000);
 
             function checkForm() {
-                var name = documnet.getElementById("name").value;
+                var name = document.getElementById("name").value;
                 var guess = document.getElementById("guess").value;
                 var ok = true;
 
@@ -72,7 +72,7 @@
                 ok = false;
                 } else {
                     document.getElementById("msg-name").textContent = "Great name!";
-                    document.getElementById("msg-name").stytle.color = "green";
+                    document.getElementById("msg-name").style.color = "green";
                 }
                 if (guess == "") {
                     document.getElementById("msg-guess").textContent = "Please enter a guess!";
