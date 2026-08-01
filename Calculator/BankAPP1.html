@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Expense Tracker</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2, h3 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .balance-box {
+      background: #e9ecef;
+      padding: 15px;
+      border-radius: 5px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 10px;
+      background: #f9f9f9;
+      margin-bottom: 5px;
+      border-left: 5px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    li.income {
+      border-left-color: #28a745;
+    }
+
+    li.expense {
+      border-left-color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Bank Tracker</h2>
+    
+    <div class="balance-box">
+      <h3>Balance: $<span id="balance">0</span></h3>
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" id="text" placeholder="Enter description...">
+      
+      <label>Amount</label>
+      <input type="number" id="amount" placeholder="Enter amount...">
+      
+      <label>Type</label>
+      <select id="type">
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+      </select>
+
+      <button onclick="addTransaction()">Add Transaction</button>
+    </div>
+
+    <h3>History</h3>
+    <ul id="list"></ul>
+  </div>
+
+  <script>
+    let totalBalance = 0;
+
+    function addTransaction() {
+      const text = document.getElementById('text').value;
+      const amount = parseFloat(document.getElementById('amount').value);
+      const type = document.getElementById('type').value;
+
+      if (text.trim() === '' || isNaN(amount) || amount <= 0) {
+        alert('Please enter a valid description and amount');
+        return;
+      }
+
+      if (type === 'income') {
+        totalBalance += amount;
+      } else {
+        totalBalance -= amount;
+      }
+
+      document.getElementById('balance').textContent = totalBalance;
+
+      const list = document.getElementById('list');
+      const item = document.createElement('li');
+      item.classList.add(type);
+      
+      const sign = type === 'income' ? '+' : '-';
+      item.innerHTML = `${text} <span>${sign}$${amount}</span>`;
+
+      list.appendChild(item);
+
+      document.getElementById('text').value = '';
+      document.getElementById('amount').value = '';
+    }
+  </script>
+
+</body>
+</html>

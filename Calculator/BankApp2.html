@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bank Tracker 2.0</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #eef2f5;
+      margin: 0;
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .app-card {
+      background-color: #ffffff;
+      width: 380px;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+      color: #222;
+    }
+
+    .total-card {
+      background-color: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .total-card h1 {
+      margin: 5px 0 0 0;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .stat-box {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    .stat-box.inc {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .stat-box.exp {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+
+    .stat-box p {
+      margin: 5px 0 0 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .input-field {
+      margin-bottom: 12px;
+    }
+
+    .input-field input, .input-field select {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .history-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    .history-item {
+      background: #f8f9fa;
+      padding: 10px 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      border-left: 4px solid #ccc;
+    }
+
+    .history-item.plus {
+      border-left-color: #2e7d32;
+    }
+
+    .history-item.minus {
+      border-left-color: #c62828;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-card">
+    <h2>Bank Tracker</h2>
+
+    <div class="total-card">
+      <small>Total Balance</small>
+      <h1 id="net-balance">$0.00</h1>
+    </div>
+
+    <div class="stats">
+      <div class="stat-box inc">
+        <small>Income</small>
+        <p id="total-income">+$0.00</p>
+      </div>
+      <div class="stat-box exp">
+        <small>Expense</small>
+        <p id="total-expense">-$0.00</p>
+      </div>
+    </div>
+
+    <div class="input-field">
+      <input type="text" id="desc" placeholder="Transaction name">
+    </div>
+
+    <div class="input-field">
+      <input type="number" id="val" placeholder="Amount">
+    </div>
+
+    <div class="input-field">
+      <select id="category">
+        <option value="in">Income (+)</option>
+        <option value="out">Expense (-)</option>
+      </select>
+    </div>
+
+    <button onclick="saveTransaction()">Add</button>
+
+    <ul class="history-list" id="log"></ul>
+  </div>
+
+  <script>
+    let incomeSum = 0;
+    let expenseSum = 0;
+
+    function saveTransaction() {
+      const descInput = document.getElementById('desc').value;
+      const valInput = parseFloat(document.getElementById('val').value);
+      const categoryInput = document.getElementById('category').value;
+
+      if (descInput.trim() === '' || isNaN(valInput) || valInput <= 0) {
+        alert('Please fill out all fields correctly');
+        return;
+      }
+
+      if (categoryInput === 'in') {
+        incomeSum += valInput;
+      } else {
+        expenseSum += valInput;
+      }
+
+      const netTotal = incomeSum - expenseSum;
+
+      document.getElementById('total-income').textContent = '+$' + incomeSum.toFixed(2);
+      document.getElementById('total-expense').textContent = '-$' + expenseSum.toFixed(2);
+      document.getElementById('net-balance').textContent = '$' + netTotal.toFixed(2);
+
+      const log = document.getElementById('log');
+      const item = document.createElement('li');
+      
+      if (categoryInput === 'in') {
+        item.className = 'history-item plus';
+        item.innerHTML = `<span>${descInput}</span> <span>+$${valInput.toFixed(2)}</span>`;
+      } else {
+        item.className = 'history-item minus';
+        item.innerHTML = `<span>${descInput}</span> <span>-$${valInput.toFixed(2)}</span>`;
+      }
+
+      log.appendChild(item);
+
+      document.getElementById('desc').value = '';
+      document.getElementById('val').value = '';
+    }
+  </script>
+
+</body>
+</html>
