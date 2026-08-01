@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Objects and Arrays Demo</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 600px;
+                margin: 40px auto;
+                padding: 20px;
+                background-color: #f4f4f9;
+                color: #333;
+            }
+            .card {
+                background: #ffffff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                margin-bottom: 20px;
+            }
+            h2 {
+                margin-top: 0;
+                color: #0056b3;
+            }
+            p{
+                line-height: 1.6;
+            }
+            span {
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="card">
+            <h2>Object Keys Display</h2>
+            <p>Name: <span id="user-name"></span></p>
+            <p>Role: <span id="user-role"></span></p>
+        </div>
+
+        <div class="card">
+            <h2>Array Index Display</h2>
+            <p>First Skill (Index 0): <span id="skill-first"></span></p>
+            <p>Third Skill (Index 2): <span id="skill-third"></span></p>
+        </div>
+
+        <div class="card">
+            <h2>Array Join & Pop Operations</h2>
+            <p>Initial Full Array (joined): <span id="array-initial"></span></p>
+            <p>Popped Element: <span id="array-popped"></span></p>
+            <p>Remaining Array (joined): <span id="array-remaining"></span></p>
+        </div>
+
+        <script>
+            const userProfile = {
+                name: "Alex",
+                age: 28,
+                role:"Developer",
+                country: "Canada"
+            };
+            const techStack = ["HTML", "CSS", "JavaScript", "React", "Node.js", "Docker"];
+
+            document.getElementById("user-name").textContent = userProfile.name;
+            document.getElementById("user-role").textContent = userProfile["role"];
+
+            document.getElementById("skill-first").textContent = techStack[0];
+            document.getElementById("skill-third").textContent = techStack[2];
+
+            document.getElementById("array-initial").textContent = techStack.join(" | ");
+
+            const poppedSkill = techStack.pop();
+            document.getElementById("array-popped").textContent = poppedSkill;
+
+            document.getElementById("array-remaining").textContent = techStack.join(" | ");
+        </script>
+    </body>
+</html>
